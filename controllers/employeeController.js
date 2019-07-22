@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    if(req.body._id == ' ')
+    if(req.body._id == '')
     insertRecord(req, res);
     else 
     updateRecord(req, res);
@@ -19,6 +19,7 @@ router.post('/', (req, res) => {
 
 
 function insertRecord(req, res){
+    debugger
    var employee = new Employee();
    employee.fullName = req.body.fullName;
    employee.email = req.body.email;
@@ -33,6 +34,7 @@ function insertRecord(req, res){
 }
 
 function updateRecord(req, res) {
+    debugger
     Employee.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
         if (!err) { res.redirect('employee/list'); }
         else {console.log('Error during record update : ' + err);
